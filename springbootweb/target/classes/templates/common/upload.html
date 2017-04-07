@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="/static/common/css/upload.css" />
+<link rel="stylesheet" href="/static/common/css/loading.css" />
+<div class="loading">
+    <div>上传中...
+        <img src="/static/common/images/1000088.gif">
+    </div>
+</div>
+
+<script src="/static/common/js/uploadApi.js" type="text/javascript"></script>
+<script>
+	$(function() {
+		$("body").on("click", ".del-icon i", function() {
+			var $this = $(this).parent("span");
+			$this.prev("input[type=hidden]").val("");
+			$this.remove();
+		});
+	});
+</script>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hawk.springboot.dal.mapper.SystemRoleMapper">
+  <!-- 插入路径信息 -->
+  <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+    <![CDATA[
+			INSERT INTO `v_sys_role`
+				(`name`,
+				 `remark`,
+				 `app_id`,
+				 `status`,
+				 `create_time`,
+				 `create_userid`,
+				 `update_time`,
+				 `update_userid`)
+			VALUES
+				(
+				#{name},
+				#{remark},
+				#{appId},
+				#{status},
+				NOW(),
+				#{createUserId},
+				NOW(),
+				#{updateUserId}
+				);
+		]]>
+  </insert>
+
+    <update id="update">
+        update v_sys_role set
+        <if test="name != null">
+            name = #{name},
+        </if>
+        <if test="remark != null">
+            remark = #{remark},
+        </if>
+        <if test="appId != null">
+            app_id = #{appId},
+        </if>
+        <if test="status != null">
+            status = #{status},
+        </if>
+        <if test="updateUserId != null">
+            update_userid = #{updateUserId},
+        </if>
+        update_time=NOW()
+        where  id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="Integer">
+        delete from v_sys_role where id = #{id}
+    </delete>
+
+    <resultMap id="role_resultMap" type="com.hawk.springboot.dal.entity.SystemRole">
+        <result column="id"  jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="status" 	 jdbcType="VARCHAR" property="status" />
+        <result column="create_time"  jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_userid"  jdbcType="INTEGER" property="createUserId" />
+        <result column="update_time"  jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="update_userid"  jdbcType="INTEGER" property="updateUserId" />
+    </resultMap>
+
+    <resultMap id="roleModule_resultMap" type="com.hawk.springboot.dal.entity.SystemRole" extends="role_resultMap">
+        <collection property="modules" ofType="com.hawk.springboot.dal.entity.SystemModule">
+            <result column="moduleId"  jdbcType="INTEGER" property="id" />
+            <result column="title" jdbcType="VARCHAR" property="title" />
+            <result column="sort" jdbcType="INTEGER" property="sort" />
+            <result column="parentId" jdbcType="INTEGER" property="parentId" />
+            <result column="url" jdbcType="VARCHAR" property="url" />
+            <result column="remark" jdbcType="VARCHAR" property="remark" />
+        </collection>
+    </resultMap>
+
+    <sql id="all_role_field">
+        id,
+        name,
+        status,
+        create_userid,
+        create_time,
+        update_userid,
+        update_time
+    </sql>
+
+    <select id="queryAll" resultMap="role_resultMap">
+        select <include refid="all_role_field" /> from v_sys_role
+    </select>
+
+    <select id="queryAllSysRoleModules" resultMap="roleModule_resultMap" >
+        select r.id, r.name, r.status, r.create_userid, r.create_time, r.update_userid, r.update_time, m.id moduleId, m.title title, m.sort sort, m.parent_id parentId, m.url url, m.remark remark from v_sys_role r left join v_sys_role_module rm on r.id = rm.role_id left join v_sys_module m on m.id = rm.module_id  where r.status='ENABLE'
+    </select>
+
+    <!--分页查找系统角色 -->
+    <select id="queryByPage" parameterType="com.hawk.springboot.common.PageBean" resultMap="roleModule_resultMap">
+        select r.id, r.name, r.status, r.create_userid, r.create_time, r.update_userid, r.update_time, m.id moduleId, m.title title, m.sort sort, m.parent_id parentId, m.url url, m.remark remark from v_sys_role r left join v_sys_role_module rm on r.id = rm.role_id left join v_sys_module m on m.id = rm.module_id
+        where 1=1
+        <if test="filters != null">
+            <if test="filters.name != null and filters.name != ''">
+                and name like concat(concat('%', #{filters.name}),'%')
+            </if>
+            <if test="filters.status != null and filters.status != ''">
+                and r.status = #{filters.status}
+            </if>
+        </if>
+        <if test="orders != null">
+            order by
+            <foreach collection="orders" item="order" separator=",">
+                ${order.name} ${order.mode}
+            </foreach>
+        </if>
+        <if test="offset != null and limit !=null">
+            limit #{offset},#{limit}
+        </if>
+    </select>
+
+    <!--统计系统角色数量 -->
+    <select id="countByFilter" parameterType="java.util.Map" resultType="Long">
+        select count(1) from v_sys_role
+        where 1=1
+        <if test="name != null and name != ''">
+            and name like concat(concat('%', #{name}),'%')
+        </if>
+        <if test="status != null and status != ''">
+            and status = #{status}
+        </if>
+    </select>
+
+
+    <select id="getById" resultMap="role_resultMap" >
+        select <include refid="all_role_field" /> from v_sys_role where id=#{id}
+    </select>
+
+    <select id="getSystemRoleModulesById" resultMap="roleModule_resultMap" >
+        select r.id, r.name, r.status, r.create_userid, r.create_time, r.update_userid, r.update_time, m.id moduleId, m.title title, m.sort sort, m.parent_id parentId, m.url url, m.remark remark from v_sys_role r inner join v_sys_role_module rm on r.id = rm.role_id inner join v_sys_module m on m.id = rm.module_id where r.id=#{id}
+    </select>
+
+    <insert id="insertSystemRoleModule">
+        insert into v_sys_role_module(role_id, module_id) values(#{roleId}, #{moduleId})
+    </insert>
+
+    <delete id="deleteSystemRoleModuleByRoleId">
+        delete from v_sys_role_module where role_id=#{roleId}
+    </delete>
+
+    <insert id="insertSystemRoleModuleBatch">
+        insert into v_sys_role_module(role_id, module_id)
+        VALUES
+        <foreach collection="roleModules" item="item" index="index" separator="," >
+            (
+            #{item.roleId},
+            #{item.moduleId}
+            )
+        </foreach>
+    </insert>
+</mapper>
