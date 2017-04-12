@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<!-- BEGIN HEADER -->
+<body>
+<div th:fragment="header" class="header navbar navbar-inverse navbar-fixed-top">
+	<!-- BEGIN TOP NAVIGATION BAR -->
+	<div class="header-inner">
+		<!-- BEGIN LOGO -->
+	  	<a class="navbar-brand" href="javascript:" style="padding:10px; font-weight:bold; font-size:18px">
+	 	海外视频运营后台
+		</a> 
+		<!-- END LOGO -->
+		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+		<a href="javascript:;" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		</a>
+		<!-- END RESPONSIVE MENU TOGGLER -->
+		<!-- BEGIN TOP NAVIGATION MENU -->
+		<ul class="nav navbar-nav pull-right">
+			<!-- BEGIN USER LOGIN DROPDOWN -->
+			<li class="dropdown user">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+					<img th:if="${ADMIN_LOGIN_AVATAR != null}" src="/metronic/assets/img/avatar.png" th:src="@{${ADMIN_LOGIN_AVATAR}}" width="29" height="29"/>
+					<img th:unless="${ADMIN_LOGIN_AVATAR != null}" src="/metronic/assets/img/avatar.png"  width="29" height="29"/>
+				<span class="username" th:text="${ADMIN_LOGIN_KEY}">
+				</span>
+				<i class="fa fa-angle-down"></i>
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="/admin/logout.shtml"><i class="fa fa-key"></i> 安全退出</a>
+					</li>
+				</ul>
+			</li>
+			
+			<li>
+			<div class="theme-panel hidden-xs hidden-sm">
+				<div class="toggler js-sidebar-toggler" title="缩放菜单" style="display: block;">
+				</div>
+			</div>
+			</li>
+		</ul>
+		<!-- END TOP NAVIGATION MENU -->
+	</div>
+	<!-- END TOP NAVIGATION BAR -->
+</div>
+</body>
+<!-- END HEADER -->
+</html>

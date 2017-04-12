@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<!-- BEGIN SIDEBAR -->
+<body>
+<div th:fragment="left" class="page-sidebar-wrapper">
+  <div class="page-sidebar navbar-collapse collapse">
+    <!-- BEGIN SIDEBAR MENU -->
+    <ul class="page-sidebar-menu">
+      <li th:class="${cur=='sel-index'} ? 'start active'">
+        <a href="/admin/index.shtml"><i class="fa fa-home"></i><span class="title">首页</span><span class="selected"></span></a>
+      </li>
+
+      <li th:class="${cur=='sel-sys'} ? 'active'" style="display:none">
+		<a href="javascript:;">
+		<i class="fa fa-cogs"></i>
+		<span class="title">系统管理</span>
+		<span class="arrow open">
+		</span>
+		</a>
+		<ul class="sub-menu">
+
+			<li th:class="${cur_sub=='sel-role'} ? 'active'" th:if="${session.ADMIN_PRIVILEGE_KEY == null || !#lists.contains(session.ADMIN_PRIVILEGE_KEY, '/admin/sys/listSystemRole.shtml')}">
+				<a href="/admin/sys/listSystemRole.shtml">
+				系统角色
+				</a>
+			</li>
+
+
+			<li th:class="${cur_sub=='sel-module'} ? 'active'" th:if="${session.ADMIN_PRIVILEGE_KEY == null || !#lists.contains(session.ADMIN_PRIVILEGE_KEY, '/admin/sys/listSystemModule.shtml')}">
+				<a href="/admin/sys/listSystemModule.shtml">
+				模块管理
+				</a>
+			</li>
+
+			<li th:class="${cur_sub=='sel-admin'} ? 'active'" th:if="${session.ADMIN_PRIVILEGE_KEY == null || !#lists.contains(session.ADMIN_PRIVILEGE_KEY, '/admin/sys/listSystemAdmin.shtml')}">
+				<a href="/admin/sys/listSystemAdmin.shtml">
+				系统用户
+				</a>
+			</li>
+		</ul>
+	 </li>
+
+      <li th:class="${cur=='sel-pwd'} ? 'active'" th:if="${session.ADMIN_PRIVILEGE_KEY == null || !#lists.contains(session.ADMIN_PRIVILEGE_KEY, '/admin/auth/modifyPassword.shtml')}">
+        <a href="/admin/auth/modifyPassword.shtml"><i class="fa fa-cog"></i><span class="title">修改密码</span><span class="selected"></span></a>
+      </li>
+    </ul>
+    <!-- END SIDEBAR MENU -->
+  </div>
+	<script>
+		$(function() {
+			$(".sub-menu").each(function() {
+				var $this = $(this);
+				var liObjs = $this.find("li");
+				if(liObjs.length > 0) {
+					$this.closest("li").show();
+				}
+			})
+		});
+	</script>
+</div>
+<!-- END SIDEBAR -->
+</body>
+</html>
