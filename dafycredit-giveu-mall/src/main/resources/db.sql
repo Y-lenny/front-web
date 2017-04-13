@@ -16,14 +16,6 @@ Date: 2017-04-12 00:14:56
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Records of brand
--- ----------------------------
-INSERT INTO `brand` VALUES ('1', '即有分期', 'http://d.ifengimg.com/mw978_mh598/p2.ifengimg.com/a/2017_14/769944ca4345d7b_size1156_w2048_h1578.jpg', '2017-04-08 20:31:07', '1', '2017-04-08 20:31:14', '1');
-INSERT INTO `brand` VALUES ('2', '即有钱包', 'http://d.ifengimg.com/mw978_mh598/p1.ifengimg.com/a/2017_14/e431d463d6afe7b_size1674_w2048_h1545.jpg', '2017-04-08 20:32:24', '1', '2017-04-08 20:32:24', '1');
-INSERT INTO `brand` VALUES ('3', 'xxxx', 'xxxx', null, null, null, null);
-INSERT INTO `brand` VALUES ('4', 'xxx', 'xxx', null, null, null, null);
-
--- ----------------------------
 -- Table structure for v_sys_admin
 -- ----------------------------
 DROP TABLE IF EXISTS `v_sys_admin`;
