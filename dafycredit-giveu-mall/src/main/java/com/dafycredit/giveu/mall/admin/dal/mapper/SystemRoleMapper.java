@@ -2,6 +2,7 @@ package com.dafycredit.giveu.mall.admin.dal.mapper;
 
 import com.dafycredit.giveu.mall.admin.dal.entity.SystemRoleModule;
 import com.dafycredit.giveu.mall.admin.dal.entity.SystemRole;
+import com.dafycredit.giveu.mall.common.base.dal.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

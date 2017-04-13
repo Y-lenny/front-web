@@ -3,7 +3,7 @@ package com.dafycredit.giveu.mall.admin.controller;
 
 import com.dafycredit.giveu.mall.admin.dal.entity.SystemAdmin;
 import com.dafycredit.giveu.mall.admin.service.ISystemAdminService;
-import com.dafycredit.giveu.mall.common.base.BaseController;
+import com.dafycredit.giveu.mall.common.base.controller.BaseController;
 import com.dafycredit.giveu.mall.common.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

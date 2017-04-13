@@ -1,4 +1,4 @@
-package com.dafycredit.giveu.mall.admin.dal.mapper;
+package com.dafycredit.giveu.mall.common.base.dal.mapper;
 
 
 import com.dafycredit.giveu.mall.common.util.PageBean;

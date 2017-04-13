@@ -1,15 +1,13 @@
 package com.dafycredit.giveu.mall.common.base;
 
-import com.dafycredit.giveu.mall.admin.dal.cache.redis.RedisCache;
 import com.dafycredit.giveu.mall.admin.dal.entity.SystemAdmin;
 import com.dafycredit.giveu.mall.admin.service.ISystemAdminService;
+import com.dafycredit.giveu.mall.common.base.controller.SpringContextHolder;
 
 
 public class BeanDataFactory {
 
     private static ISystemAdminService systemAdminService;
-
-    private static RedisCache redisCache;
 
     public static ISystemAdminService getSystemAdminService() {
        if (systemAdminService == null)
@@ -17,16 +15,8 @@ public class BeanDataFactory {
         return systemAdminService;
     }
 
-
-    public static RedisCache getRedisCache() {
-        if (redisCache == null)
-            redisCache = SpringContextHolder.getBean(RedisCache.class);
-        return redisCache;
-    }
-
     public static SystemAdmin getAdminById(Integer id) {
         //TODO 设计从cache中获取
-
       //  String key = "adminObject_" + id;
       //  SystemAdmin admin = (SystemAdmin) getRedisCache().get(key);
 

@@ -1,0 +1,11 @@
+# JDBC config
+spring:
+  datasource:
+    url: mysql://dev-ip:3306/mall?useUnicode=true&amp;autoReconnect=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username : root
+    password : root
+    driver-class-name : com.mysql.jdbc.Driver
+# thymeleaf config
+  spring:
+    thymeleaf:
+      cache: false

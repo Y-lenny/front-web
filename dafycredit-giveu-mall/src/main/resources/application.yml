@@ -1,0 +1,35 @@
+# server config
+server:
+  port: 8088
+# env config
+spring:
+  profiles:
+    active: dev
+    # alibaba druid
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters : stat
+    maxActive : 20
+    initialSize : 10
+    maxWait : 5000
+    minIdle : 10
+    timeBetweenEvictionRunsMillis : 60000
+    minEvictableIdleTimeMillis : 30000
+    validationQuery : select 'x'
+    testWhileIdle : true
+    testOnBorrow : false
+    testOnReturn : false
+    poolPreparedStatements : true
+    maxOpenPreparedStatements : 20
+  application:
+    name: DafycreditGiveUMall
+# mybatis config
+mybatis:
+  type-aliases-package: com.dafycredit.giveu.mall.admin.dal.entity
+  mapper-locations:
+    - classpath*:mybatis-mapper/admin/*.xml
+    - classpath*:mybatis-mapper/goods/*.xml
+    - classpath*:mybatis-mapper/order/*.xml
+    - classpath*:mybatis-mapper/user/*.xml
+# switch debug
+debug: true

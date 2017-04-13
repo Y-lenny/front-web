@@ -1,4 +1,4 @@
-package com.dafycredit.giveu.mall.common.base;
+package com.dafycredit.giveu.mall.common.base.controller;
 
 import com.dafycredit.giveu.mall.common.exception.CustomerException;
 import com.dafycredit.giveu.mall.common.util.ReponseMsg;

@@ -1,4 +1,4 @@
-package com.dafycredit.giveu.mall.common.base;
+package com.dafycredit.giveu.mall.common.base.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

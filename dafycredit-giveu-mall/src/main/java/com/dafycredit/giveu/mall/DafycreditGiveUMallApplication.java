@@ -7,7 +7,6 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication
 
-//@MapperScan(basePackages = {"com.dafycredit.giveu.mall.admin.dal.mapper"})
 @ServletComponentScan
 public class DafycreditGiveUMallApplication {
 
